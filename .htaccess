@@ -1,0 +1,15 @@
+# https://github.com/slimphp/Slim-Skeleton/blob/master/.htaccess
+AddDefaultCharset utf-8
+Options All -Indexes
+
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+<IfModule mod_rewrite.c>
+  # Redirect to the public folder
+  RewriteEngine On
+  RewriteRule ^$ public/ [L]
+  RewriteRule (.*) public/$1 [L]
+</IfModule>

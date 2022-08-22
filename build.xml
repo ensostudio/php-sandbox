@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PHPSandbox" default="build">
+  <target name="build">
+    <echo msg="Build sandbox assets..."/>
+
+    <delete>
+        <fileset dir="./public/assets">
+            <include name="js/*"/>
+            <include name="js/**/*"/>
+            <include name="css/*"/>
+            <include name="css/**/*"/>
+            <include name="scss/*/*"/>
+            <include name="scss/*"/>
+        </fileset>
+    </delete>
+
+    <copy todir="./public/assets/js">
+      <fileset dir="./vendor/npm-asset/jquery/dist">
+        <include name="jquery.min.*"/>
+        <include name="jquery.js"/>
+      </fileset>
+    </copy>
+    <copy todir="./public/assets/js/ace">
+      <fileset dir="./vendor/npm-asset/ace-builds/src-min-noconflict">
+        <include name="*.js"/>
+      </fileset>
+    </copy>
+    <jsmin targetDir="./public/assets/js" suffix=".min">
+      <fileset dir="./assets">
+        <include name="*.js"/>
+      </fileset>
+    </jsmin>
+
+    <copy todir="./public/assets/scss">
+      <fileset dir="./vendor/npm-asset/bootstrap/scss">
+        <include name="*/_*.scss"/>
+        <include name="_*.scss"/>
+      </fileset>
+    </copy>
+    <copy file="./assets/sandbox.scss" tofile="./public/assets/scss/sandbox.scss"/>
+    <sass style="compressed" input="./public/assets/scss/sandbox.scss" output="./public/assets/css/sandbox.min.css"/>
+  </target>
+</project>

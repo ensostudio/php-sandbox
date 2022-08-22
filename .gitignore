@@ -1,0 +1,8 @@
+/.idea/
+/nbproject/
+/vendor/
+*.te?mp
+*.cache
+*.log
+*.lock
+*.phar

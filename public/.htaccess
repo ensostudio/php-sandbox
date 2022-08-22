@@ -1,0 +1,39 @@
+# https://github.com/slimphp/Slim-Skeleton/blob/master/public/.htaccess
+
+AddDefaultCharset utf-8
+DirectoryIndex index.php
+Options All -Indexes
+
+<ifModule mod_headers.c>
+  <FilesMatch "\.(jpe?g|png|gif|webp|js|s?css|map|svg|ttf|eot|otf|woff2?)$">
+    Header set Cache-Control "max-age=86400, public"
+  </FilesMatch>
+</ifModule>
+
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # the absolute physical path to the directory that contains this htaccess file.
+  RewriteBase /
+  # Some hosts may require you to use the `RewriteBase` directive.
+  # Determine the RewriteBase automatically and set it as environment variable.
+  # If you are using Apache aliases to do mass virtual hosting or installed the
+  # project in a subdirectory, the base path will be prepended to allow proper
+  # resolution of the index.php file and to redirect to the correct URI. It will
+  # work in environments without path prefix as well, providing a safe, one-size
+  # fits all solution. But as you do not need it in this case, you can comment
+  # the following 2 lines to eliminate the overhead.
+  RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+  RewriteRule ^(.*) - [E=BASE:%1]
+  # if NOT request certain static file from anywhere
+  RewriteCond %{REQUEST_URI} !\.(jpe?g|png|gif|webp|js|s?css|map|svg|ttf|eot|otf|woff2?)$ [or]
+  # or if file doesnt' exist
+  RewriteCond %{REQUEST_FILENAME} !-d
+  # or if directory doesnt' exist
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^ index.php [QSA,L]
+</IfModule>

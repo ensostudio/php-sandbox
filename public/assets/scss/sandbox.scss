@@ -1,0 +1,44 @@
+$btn-focus-width: 1px;
+$input-btn-focus-width: 1px;
+$input-focus-width: 1px;
+$code-color: #59359a;
+$input-btn-padding-y: .25rem;
+$input-btn-padding-x: .85rem;
+
+@import "functions";
+@import "variables";
+@import "mixins";
+@import "utilities";
+@import "root";
+@import "reboot";
+@import "type";
+@import "containers";
+@import "grid";
+@import "buttons";
+@import "helpers";
+@import "utilities/api";
+
+// Sandbox styles
+pre > small {
+  font-size: 90%;
+  color: #6d6a6a;
+}
+#editor-wrapper {
+  height: 95%;
+}
+#buttonbar {
+  height: auto;
+}
+#editor {
+  height: 96%;
+}
+#statusbar {
+  height: 4%;
+}
+// Kint: hide redundant buttons
+.kint-popup-trigger,
+.kint-search-trigger,
+.kint-access-path-trigger,
+.kint-rich dfn {
+  display: none !important;
+}
