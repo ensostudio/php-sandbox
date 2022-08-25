@@ -17,22 +17,27 @@ class ExecuteAction implements ActionInterface
      */
     public function __invoke(Request $request, Response $response): Response
     {
-        $tmpFile = \tmpfile();
-        $uri = \stream_get_meta_data($tmpFile)['uri'];
-        \fwrite($tmpFile, $request->getParsedBody()['code']);
+        $code = $request->getParsedBody()['code'];
+        $code = \preg_replace('/^<\?(php)?\r?\n/', '', \trim($code), 1);
 
         \ob_start();
         try {
             require __DIR__ . '/../bootstrap.php';
-            include $uri;
-            //eval('d([1]);');
+            eval($code);
             $response->getBody()->write(\ob_get_clean() . '#php-sandbox-end-output#');
         } catch (Throwable $e) {
+            $msg = \get_class($e) . ': ' . \str_replace(['"', "\r", "\n"], ["'", '', ' '], $e->getMessage());
+            $line = $e->getLine() + 1;
+            foreach ($e->getTrace() as $trace) {
+                if (\str_ends_with($trace['file'], 'eval()\'d code')) {
+                    $line = $trace['line'] + 1;
+                    break;
+                }
+            }
+
             $response->getBody()->write(\ob_get_clean() ?: '');
-            $msg = \get_class($e) . ': ' . \str_replace(['"', "\r\n", "\n"], ["'", "\n", ' '], $e->getMessage());
-            $response = $response->withHeader('X-Error', '"' . $msg . '"; line=' . $e->getLine())->withStatus(500);
+            $response = $response->withHeader('X-Error', '"' . $msg . '"; line=' . $line)->withStatus(500);
         }
-        fclose($tmpFile);
 
         return $response;
     }
