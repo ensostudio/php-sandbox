@@ -1,9 +1,11 @@
 ## PHP Sandbox
 
-The sandbox to test your PHP code in Web browser.
-
 [![Latest Stable Version](https://img.shields.io/packagist/v/ensostudio/php-sandbox.svg)](https://packagist.org/packages/ensostudio/php-sandbox)
 [![Total Downloads](https://img.shields.io/packagist/dt/ensostudio/php-sandbox.svg)](https://packagist.org/packages/ensostudio/php-sandbox)
+
+The sandbox to test your PHP code in Web browser.
+
+![screenshot](https://user-images.githubusercontent.com/3521094/186710160-e55c5fc6-3a9b-40ac-a952-d421c95de992.png)
 
 REQUIREMENTS
 ------------
