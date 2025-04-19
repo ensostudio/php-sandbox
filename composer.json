@@ -36,10 +36,10 @@
     "phing/phing": "3.*",
     "phing/task-jsmin": "dev-main",
     "phing/task-sass": "dev-main",
-    "scssphp/scssphp": "dev-master",
+    "scssphp/scssphp": "v1.13.0",
     "npm-asset/ace-builds": "^1.9.5",
     "npm-asset/jquery": "^3.6.0",
-    "npm-asset/bootstrap": "~5.1.3",
+    "npm-asset/bootstrap": "^5.3.5",
     "roave/security-advisories": "dev-latest"
   },
   "autoload": {

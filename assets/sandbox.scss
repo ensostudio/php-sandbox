@@ -5,8 +5,12 @@ $code-color: #59359a;
 $input-btn-padding-y: .25rem;
 $input-btn-padding-x: .85rem;
 
+@import "mixins/banner";
+@include bsBanner("");
 @import "functions";
 @import "variables";
+@import "variables-dark";
+@import "maps";
 @import "mixins";
 @import "utilities";
 @import "root";
