@@ -8,15 +8,6 @@ use EnsoStudio\PhpSandbox\Actions;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ContentLengthMiddleware;
 
-error_reporting(E_ALL);
-ini_set('log_errors', 'Off');
-ini_set('display_errors', 'On');
-set_error_handler(
-    static function ($code, $message, $file, $line) {
-        throw new ErrorException($message, $code, $code, $file, $line);
-    }
-);
-
 require __DIR__ . '/../vendor/autoload.php';
 
 $application = AppFactory::create();
