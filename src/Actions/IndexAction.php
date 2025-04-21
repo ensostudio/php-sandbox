@@ -2,10 +2,8 @@
 
 namespace EnsoStudio\PhpSandbox\Actions;
 
-use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
-use Throwable;
 
 /**
  * Application action display sandbox HTML.
