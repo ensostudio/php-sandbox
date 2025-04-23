@@ -1,7 +1,7 @@
 /* jslint browser: true */
-/* globals document, window, ace, jQuery, hljs */
+/* globals document, window, ace, jQuery */
 'use strict';
-(function (ace, $, storage, highlight) {
+(function (ace, $, storage) {
     const codeSeparator = '#php-sandbox-end-output#',
         errorHeader = 'X-Error',
         storageKey = 'php_sandbox';
@@ -58,7 +58,7 @@
     const langTools = ace.require('ace/ext/language_tools');
     langTools.addCompleter({
         getCompletions: function (editor, session, pos, prefix, callback) {
-            if (prefix.length > 2 && /^[_A-Za-z\\\\]\w+$/.test(prefix)) {
+            if (prefix.length > 2 && /^[_A-Za-z\\]\w+$/.test(prefix)) {
                 $.getJSON(
                     '/autocomplete',
                     {prefix: prefix, position: pos},
@@ -147,7 +147,7 @@
         if (jqXHR.getResponseHeader(errorHeader) != null) {
             const matches =  jqXHR.getResponseHeader(errorHeader).match(/^"([^"]+)"; line=(\d+)$/);
             editor.getSession().setAnnotations([{
-                row: --matches[2],
+                row: matches[2],
                 column: 0,
                 text: matches[1],
                 type: 'error'

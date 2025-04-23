@@ -44,7 +44,7 @@ class AutoCompleteAction implements ActionInterface
         }
 
         $prefixLength = \strlen($prefix);
-        $result = (array) \array_filter(
+        $result = \array_filter(
             \array_merge(...\array_values($list)),
             static function ($value) use ($prefix, $prefixLength) {
                 return \strncmp($value, $prefix, $prefixLength) === 0;
@@ -57,16 +57,16 @@ class AutoCompleteAction implements ActionInterface
             foreach ($result as $key => $value) {
                 foreach ($list as $group => $values) {
                     if (\in_array($value, $values, true)) {
+                        // https://github.com/ajaxorg/ace/blob/v1.9.6/src/autocomplete/text_completer.js#L39
+                        $result[$key] = [
+                            'caption' => $value,
+                            'value' => $value,
+                            'score' => 1000000,
+                            'meta' => $group
+                        ];
                         break;
                     }
                 }
-                // https://github.com/ajaxorg/ace/blob/v1.9.6/src/autocomplete/text_completer.js#L39
-                $result[$key] = [
-                    'caption' => $value,
-                    'value' => $value,
-                    'score' => 1000000,
-                    'meta' => $group
-                ];
             }
 
             $result = \array_values($result);
