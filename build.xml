@@ -5,10 +5,9 @@
 
     <delete>
         <fileset dir="./public/assets">
-            <include name="js/*"/>
             <include name="js/**/*"/>
+            <include name="js/*"/>
             <include name="css/*"/>
-            <include name="css/**/*"/>
             <include name="scss/*/*"/>
             <include name="scss/*"/>
         </fileset>
