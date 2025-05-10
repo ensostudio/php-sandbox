@@ -5,6 +5,10 @@
 
 The sandbox to test your PHP code in Web browser.
 
+- Extended autocomplete for constants, functions and classes/interfaces
+- Helper functions to dump data and reflect functions/classes in readeable format
+- Format code in [PSR-12](https://www.php-fig.org/psr/psr-12/)
+
 ![screenshot](https://user-images.githubusercontent.com/3521094/186710160-e55c5fc6-3a9b-40ac-a952-d421c95de992.png)
 
 REQUIREMENTS
@@ -26,20 +30,25 @@ If you do not have Composer, you may install it by following the instructions at
 [getcomposer.org](https://getcomposer.org/doc/00-intro.md#introduction).
 
 You can then install this project template using the following command:
-~~~shell
+
+```shell
 composer create-project ensostudio/php-sandbox sandbox
-~~~
+```
 
 Now you should be able to access the application through the following URL, assuming `sandbox` is the directory
 directly under the Web root and start build-in HTTP server:
-~~~shell
+
+```shell
 composer run start
-~~~
+```
 
 CUSTOMIZATION
 -------------
 
 Run [Phing](https://www.phing.info) to re-build public assets:
-~~~shell
+
+```shell
 composer run build
-~~~
+```
+
+Update [bootstrap.php](src/bootstrap.php) to change Kint options or add extra functions.
