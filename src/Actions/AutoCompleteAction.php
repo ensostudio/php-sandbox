@@ -36,7 +36,7 @@ class AutoCompleteAction implements ActionInterface
         $list = [];
         // If prefix in upper case, then in most cases, is constant.
         if ($prefix === \strtoupper($prefix)) {
-            $list['constants'] = \get_defined_constants();
+            $list['constants'] = \array_keys(\get_defined_constants());
         }
         $list['classes'] = \get_declared_classes();
         if ('A' >= $prefix[0] && $prefix[0] <= 'Z') {
@@ -46,7 +46,10 @@ class AutoCompleteAction implements ActionInterface
         $prefixLength = \strlen($prefix);
         $result = \array_filter(
             \array_merge(...\array_values($list)),
-            static function ($value) use ($prefix, $prefixLength) {
+            function ($value) use ($prefix, $prefixLength) {
+                if (empty($value)) {
+                    return false;
+                }
                 return \strncmp($value, $prefix, $prefixLength) === 0;
             }
         );
